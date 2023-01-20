@@ -96,3 +96,12 @@ SITE PARA VER OS ICONES EM DIFERENTES BIBLILOTECAS QUE JÁ EXISTE NO EXPO
 
 TRABALHANDO COMO DAYJS (FORATAÇÃO DE DATAS)
 - npm i dayjs
+
+importar o arquivo no início do App.tsx
+- import './src/lib/dayjs';
+
+CONFIGURAÇÃO DA NAVEGAÇÃO DO APP
+* https://reactnavigation.org/docs/getting-started/ (DOCUMENTAÇÃO)
+- npm install @react-navigation/native
+- npx expo install react-native-screens react-native-safe-area-context
+- npm install @react-navigation/native-stack

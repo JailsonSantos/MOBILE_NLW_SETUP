@@ -1,7 +1,7 @@
 import './src/lib/dayjs';
 import { Fragment } from 'react';
+import { Routes } from './src/routes';
 import { StatusBar } from 'react-native';
-import { Home } from './src/screens/Home';
 import { Loading } from './src/components/Loading';
 
 import {
@@ -29,7 +29,7 @@ export default function App() {
 
   return (
     <Fragment>
-      <Home />
+      <Routes />
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
     </Fragment>
   );

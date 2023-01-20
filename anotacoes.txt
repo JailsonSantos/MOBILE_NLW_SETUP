@@ -1,0 +1,98 @@
+MOBILE-NLW-SETUP
+
+CIRANDO O PROJETO COM EXPO
+- npx create-expo-app . --template
+- Black (typescript)
+
+EXECUTANDO A APLICAÇÃO
+- npx expo start
+- npx expo start --clear (roda o comando limando o cache)
+
+INSTALANDO FONTS EXTERNAS
+- npx expo install expo-font @expo-google-fonts/inter
+
+
+- INCLUINDO O NATIVEWIND E tailwindcss
+* https://www.nativewind.dev/quick-starts/expo (DOCUMENTAÇÃO)
+
+- npm i nativewind
+- npm i tailwindcss -D
+
+
+INICIANDO O tailwindcss.config
+- npx tailwindcss init
+
+CONFIGURAÇÃO DO TAILWINDCSS.CONFIG.JS
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./App.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}"
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: '#09090a',
+      },
+      fontFamily: {
+        regular: 'Inter_400Regular',
+        semibold: 'Inter_600SemiBold',
+        bold: 'Inter_700Bold',
+        extrabold: 'Inter_800ExtraBold'
+      }
+    },
+  },
+  plugins: [],
+}
+
+ADICIONAR ESTA LINHA NO ARQUIVO babel.config.js
+ 
+ plugins: ["nativewind/babel"],
+
+
+CONFIGURANDO AS CLASNAME COM TAILWINDCSS
+ - criar uma pasta no src / @types / app.d.ts
+
+ ADICIONAR O SEGUINTE CÓDIGO NO ARQUIVO CRIADO DE TIPAGEM
+ /// <reference types="nativewind/types" />
+
+ REACT NATIVE NÃO SUPORTA SVG DE FORMA NATIVA
+
+ INSTALANDO 2 BIBLIOTECAS PARA USAR SVG NA APLICAÇÃO
+* https://docs.expo.dev/versions/latest/sdk/svg/ (DOCUMENTAÇÃO)
+  - npx expo install react-native-svg
+
+INSTALANDO O REACT NATIVE SVG TRANSFORMER
+* https://github.com/kristerkari/react-native-svg-transformer (DOCUMENTAÇÃO)
+  - npm i react-native-svg-transformer -D
+
+CONGIFIGURAÇÃO PRA USAR O SVG NO REACT NATIVE
+* CRIAR O ARQUIVO metro.config.js
+
+const { getDefaultConfig } = require("expo/metro-config");
+
+module.exports = (() => {
+  const config = getDefaultConfig(__dirname);
+
+  const { transformer, resolver } = config;
+
+  config.transformer = {
+    ...transformer,
+    babelTransformerPath: require.resolve("react-native-svg-transformer"),
+  };
+  config.resolver = {
+    ...resolver,
+    assetExts: resolver.assetExts.filter((ext) => ext !== "svg"),
+    sourceExts: [...resolver.sourceExts, "svg"],
+  };
+
+  return config;
+})();
+
+
+SITE PARA VER OS ICONES EM DIFERENTES BIBLILOTECAS QUE JÁ EXISTE NO EXPO
+* https://oblador.github.io/react-native-vector-icons/ (DOCUMENTAÇÃO)
+
+TRABALHANDO COMO DAYJS (FORATAÇÃO DE DATAS)
+- npm i dayjs

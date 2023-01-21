@@ -1,10 +1,10 @@
 import { useState } from "react";
+import colors from "tailwindcss/colors";
 import { Feather } from '@expo/vector-icons';
 import { Checkbox } from "../components/Checkbox";
 import { BackButton } from "../components/BackButton";
-import { ScrollView, View, Text, TextInput, TouchableOpacity } from "react-native";
-import colors from "tailwindcss/colors";
-
+import { ScrollView, View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
+import { api } from "../lib/axios";
 
 const availableWeekDays = [
   'Domingo',
@@ -18,6 +18,7 @@ const availableWeekDays = [
 
 export function New() {
 
+  const [title, setTitle] = useState('');
   const [weekDays, setWeekDays] = useState<number[]>([]);
 
   function handleToggleWeekDay(weekDayIndex: number) {
@@ -29,7 +30,24 @@ export function New() {
     }
   }
 
+  async function handleCreateNewHabit() {
+    try {
+      if (!title.trim() || weekDays.length === 0) {
+        Alert.alert('Novo Hábito', 'Informe o nome do hábito e escolha os dias da semana.')
+      }
 
+      await api.post('/habits', { title, weekDays });
+
+      setTitle('');
+      setWeekDays([]);
+
+      Alert.alert('Novo Hábito', 'Hábito criado com sucesso!')
+
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Ops', 'Não foi possível criar o novo hábito.')
+    }
+  }
   return (
     <View className="flex-1 bg-background px-8 pt-16">
       <ScrollView
@@ -47,8 +65,10 @@ export function New() {
         </Text>
 
         <TextInput
-          placeholder="Ex.: Exercícios, dormir bem, etc..."
+          value={title}
+          onChangeText={setTitle}
           placeholderTextColor={colors.zinc[400]}
+          placeholder="Ex.: Exercícios, dormir bem, etc..."
           className="h-12 pl-4 rounded-lg mt-3 bg-zinc-900 text-white border-2 border-zinc-800 focus:border-green-600"
         />
 
@@ -69,6 +89,7 @@ export function New() {
 
         <TouchableOpacity
           activeOpacity={0.7}
+          onPress={handleCreateNewHabit}
           className="w-full h-14 flex-row items-center justify-center bg-green-600 rounded-md mt-6"
         >
           <Feather

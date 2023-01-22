@@ -107,7 +107,15 @@ CONFIGURAÇÃO DA NAVEGAÇÃO DO APP
 - npm install @react-navigation/native-stack
 
 INSTALANDO O AXIOS
-- npm i axios
+- npm i axios 
 
 TRABALHANDO COM DIVERSOS TIPOS DE FORMATAÇÃO COM  CLSX
 - npm install --save clsx
+
+TRABALHANDO COM ANIMAÇÕES REACT
+* https://docs.expo.dev/versions/latest/sdk/reanimated/ (DOCUMENTAÇÃO)
+* https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/animations (DOCUMENTAÇÃO)
+- npx expo install react-native-reanimated
+
+EXECUTANDO A APLICAÇÃO LIMPANDO O CACHE
+- npx expo start --clear
